@@ -1,0 +1,23 @@
+---
+title: "Hoe zit het nou met de COVID gevallen op Curacao?"
+output: html_notebook
+---
+
+## De data
+
+Om dit te bekijken analyseer ik de [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19) -- een geweldig voorbeeld van open data!
+
+Ik load hier de data:
+```{r}
+covid19_confirmed_global <- read.csv('csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
+covid19_recovered_global <- read.csv('csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
+```
+
+```{r}
+covid19_confirmed_global_curacao <- covid19_confirmed_global[covid19_confirmed_global$Province.State=='Curacao',5:length(covid19_confirmed_global$Province.State=='Curacao')]
+date = seq(as.Date("2020/1/20"), by = "day", length.out = length(covid19_confirmed_global_curacao))
+str(unlist(covid19_confirmed_global_curacao))
+str(date)
+plot(date,unlist(covid19_confirmed_global_curacao))
+```
+
